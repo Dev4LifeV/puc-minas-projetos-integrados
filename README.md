@@ -1,5 +1,16 @@
 # Projeto Eco Delivery
 
+# Executando o Projeto Localmente
+
+Para rodar o projeto localmente, basta:
+
+- Clonar o projeto
+- Abrir um terminal na raiz do projeto
+- Executar `npm install`
+- Criar um arquivo `.env` na raiz do projeto contendo as variáveis de ambiente enviadas via Canvas
+- Executar `npm run dev`
+- Abrir o navegador de internet e ir para `http://localhost:3000`
+
 # Objetivo
 
 Todas as funcionalidades do sistema são providas via o BaaS (Backend as a service) Firebase e Tinify API (minificação de imagens).

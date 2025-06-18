@@ -1,4 +1,4 @@
-import { Add, Liquor, Remove } from "@mui/icons-material";
+import { Add, Remove } from "@mui/icons-material";
 import {
   Button,
   Card,
@@ -19,6 +19,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import Image from "next/image";
 import Item from "@/helpers/firestore/model/order/item";
+import { Liquor } from "@icons/index";
 import { Product } from "../../../helpers/firestore/model/product/product";
 import { themeVars } from "@/theme/theme.css";
 
@@ -101,7 +102,7 @@ export default function ProductSelectionStep({
                   height={100}
                 />
               ) : (
-                <Liquor height={100} width={100} />
+                <Liquor style={{ fontSize: "100px" }} />
               )}
               <Stack>
                 <Typography variant="h6">{product.description}</Typography>
@@ -147,11 +148,7 @@ export default function ProductSelectionStep({
                     src={selectedProduct?.image}
                   />
                 ) : (
-                  <Liquor
-                    sx={{
-                      fontSize: 300,
-                    }}
-                  />
+                  <Liquor style={{ alignSelf: "center", fontSize: "200px" }} />
                 )}
                 <Typography variant="h5">
                   {selectedProduct?.description}

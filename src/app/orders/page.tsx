@@ -10,8 +10,8 @@ import { OrderContext } from "./context/OrderContext";
 import Tile from "@/components/basis/Tile";
 import useOrders from "./hooks/useOrders";
 
-const CreateOrderButton = () => {
-  return (
+const CreateOrderButton = ({ isStoreOpen }: { isStoreOpen?: boolean }) => {
+  return isStoreOpen ? (
     <Link href={`/orders/new-order-wizard`}>
       <div
         style={{
@@ -28,6 +28,8 @@ const CreateOrderButton = () => {
         <Add /> Cadastrar Novo Pedido
       </div>
     </Link>
+  ) : (
+    <div></div>
   );
 };
 
@@ -41,13 +43,17 @@ export default function Orders() {
     getStoreStatus();
   }, [listenToOrders, storeStatus, getStoreStatus]);
 
+  useEffect(() => {
+    console.log(storeStatus);
+  }, [storeStatus]);
+
   return (
     <>
       <LoadingContainer
         loading={loading || storeStatus === undefined}
         error={error !== undefined}
         isEmpty={orders === undefined || orders?.length <= 0}
-        emptyComponent={<CreateOrderButton />}
+        emptyComponent={<CreateOrderButton isStoreOpen={storeStatus} />}
         emptyMessage={
           storeStatus === false
             ? "A loja está fechada. Abra a loja para ver os pedidos."
@@ -56,7 +62,7 @@ export default function Orders() {
             : undefined
         }
       >
-        <CreateOrderButton />
+        <CreateOrderButton isStoreOpen={storeStatus} />
         {orders && (
           <>
             <ListTile>
