@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef } from "react";
+import { ComponentProps, forwardRef, useId } from "react";
 
 import { cn } from "@/utils/classNames";
 import { outlineBorder } from "./style.css";
@@ -23,6 +23,8 @@ const InputText = forwardRef<
   }: InputTextProps & ComponentProps<"input">,
   ref
 ) {
+  const generatedId = useId();
+  const inputId = id || generatedId;
   return (
     <div
       style={{
@@ -32,14 +34,14 @@ const InputText = forwardRef<
         width: "100%",
       }}
     >
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={inputId}>{label}</label>
       <input
         style={{ border: error ? "1px solid red" : undefined }}
         {...props}
         ref={ref}
         autoComplete="new-password"
         autoCorrect="false"
-        id={id}
+        id={inputId}
         type="text"
         placeholder={label}
         className={cn(outlineBorder, props.className)}

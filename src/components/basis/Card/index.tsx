@@ -16,8 +16,9 @@ export default function Card({
   label,
   shadow = undefined,
 }: CardProps) {
+  const safeHref = href && href.length > 0 ? href : "#";
   return (
-    <Link href={href ?? "#"} className={card} style={{ boxShadow: shadow }}>
+    <Link href={safeHref} className={card} style={{ boxShadow: shadow }}>
       <div>
         <Icon fontSize={36} />
         <Typography.TitleRegular>{label}</Typography.TitleRegular>
