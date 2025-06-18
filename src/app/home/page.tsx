@@ -8,7 +8,7 @@ import {
 } from "firebase/remote-config";
 import { homeContainer, homeHeader } from "./style.css";
 import { parseAsBoolean, useQueryState } from "nuqs";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import useStoreStatus, { StoreStatus } from "@/hooks/useStoreStatus";
 
 import Image from "next/image";
@@ -27,7 +27,9 @@ export default function Page() {
   const [icon, setIcon] = useState("");
   const [title, setTitle] = useState("");
 
-  const { avgTicket, totalIncome, totalOrders } = useDashboard(() => {});
+  const onError = useCallback(() => {}, []);
+
+  const { avgTicket, totalIncome, totalOrders } = useDashboard(onError);
   useEffect(() => {
     const remoteConfig = getRemoteConfig(app);
     fetchAndActivate(remoteConfig).then((_) => {
