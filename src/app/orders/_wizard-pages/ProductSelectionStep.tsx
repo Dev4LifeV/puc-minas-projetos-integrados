@@ -17,10 +17,10 @@ import {
 } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 
-import Item from "@/helpers/firestore/model/order/item";
-import { themeVars } from "@/theme/theme.css";
 import Image from "next/image";
+import Item from "@/helpers/firestore/model/order/item";
 import { Product } from "../../../helpers/firestore/model/product/product";
+import { themeVars } from "@/theme/theme.css";
 
 interface ProductionSelectionStepProps {
   products: Product[];
@@ -247,8 +247,7 @@ export default function ProductSelectionStep({
                       new Date().toISOString(),
                       selectedProduct!,
                       quantity,
-                      selectedProduct!.value * quantity,
-                      ""
+                      selectedProduct!.value * quantity
                     )
                   );
                   setQuantity(0);
