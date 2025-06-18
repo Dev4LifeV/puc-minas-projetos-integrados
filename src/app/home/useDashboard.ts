@@ -54,15 +54,15 @@ export default function useDashboard(onError: () => void) {
               content.product.image
             ),
             content.quantity,
-            content.value,
-            content?.notes ?? ""
+            content.value
           )
       ),
       data?.phoneNumber,
       new Date(data?.createdOn),
       data.status,
       data?.paymentMethod,
-      data?.uidOrderIssuer
+      data?.uidOrderIssuer,
+      data.notes
     );
   };
 
