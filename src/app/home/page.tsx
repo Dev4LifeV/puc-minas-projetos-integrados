@@ -1,35 +1,33 @@
 "use client";
 
-import useStoreStatus, { StoreStatus } from "@/hooks/useStoreStatus";
 import { Card, IconButton, Stack, Typography } from "@mui/material";
 import {
   fetchAndActivate,
   getRemoteConfig,
   getString,
 } from "firebase/remote-config";
-import { parseAsBoolean, useQueryState } from "nuqs";
-import { useCallback, useContext, useEffect, useState } from "react";
 import { homeContainer, homeHeader } from "./style.css";
+import { parseAsBoolean, useQueryState } from "nuqs";
+import { useContext, useEffect, useState } from "react";
+import useStoreStatus, { StoreStatus } from "@/hooks/useStoreStatus";
 
+import Image from "next/image";
 import LoadingContainer from "@/components/basis/LoadingContainer";
+import MenuIcon from "@mui/icons-material/Menu";
+import { OrderContext } from "../orders/context/OrderContext";
 import StoreSwitch from "@/components/basis/StoreSwitch";
 import { app } from "@/firebase-config";
-import useMediaQuery from "@/hooks/useMediaQuery";
-import { viewPort } from "@/theme/constants";
 import { themeVars } from "@/theme/theme.css";
-import MenuIcon from "@mui/icons-material/Menu";
-import Image from "next/image";
-import { OrderContext } from "../orders/context/OrderContext";
-import useOrders from "../orders/hooks/useOrders";
 import useDashboard from "./useDashboard";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import useOrders from "../orders/hooks/useOrders";
+import { viewPort } from "@/theme/constants";
 
 export default function Page() {
   const [icon, setIcon] = useState("");
   const [title, setTitle] = useState("");
 
-  const onError = useCallback(() => {}, []);
-
-  const { avgTicket, totalIncome, totalOrders } = useDashboard(onError);
+  const { avgTicket, totalIncome, totalOrders } = useDashboard(() => {});
   useEffect(() => {
     const remoteConfig = getRemoteConfig(app);
     fetchAndActivate(remoteConfig).then((_) => {
